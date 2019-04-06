@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">O2OTest</string>
+    <string name="search">Search…</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="web_ref">Web Reference</string>
+    <string name="action_settings">Settings</string>
+    <string name="generic_error">Generic error</string>
+    <string name="connection_error">Connection error</string>
+</resources>
