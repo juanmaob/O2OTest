@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.ImageView
 import androidx.core.app.ActivityOptionsCompat
-import com.seventhson.o2otest.data.pojos.Recipe
+import com.seventhson.o2otest.domain.model.Recipe
 import com.seventhson.o2otest.ui.detail.DetailActivity
 import com.seventhson.o2otest.ui.detail.DetailActivity.Companion.RECIPE
 

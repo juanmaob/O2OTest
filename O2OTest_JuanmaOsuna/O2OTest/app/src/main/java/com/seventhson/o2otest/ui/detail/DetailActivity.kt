@@ -2,7 +2,7 @@ package com.seventhson.o2otest.ui.detail
 
 import android.os.Bundle
 import com.seventhson.o2otest.R
-import com.seventhson.o2otest.data.pojos.Recipe
+import com.seventhson.o2otest.domain.model.Recipe
 import com.seventhson.o2otest.ui.common.BaseActivity
 import com.seventhson.o2otest.utils.fromUrl
 import kotlinx.android.synthetic.main.activity_detail.*

@@ -1,5 +1,6 @@
 package com.seventhson.o2otest.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,11 +8,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.seventhson.o2otest.R
-import com.seventhson.o2otest.data.pojos.Recipe
+import com.seventhson.o2otest.domain.model.Recipe
 import com.seventhson.o2otest.ui.common.BaseActivity
 import com.seventhson.o2otest.ui.common.Navigator
 import com.seventhson.o2otest.ui.main.adapter.RecipeAdapter
-import com.seventhson.o2otest.ui.main.di.MainModule
 import com.seventhson.o2otest.utils.hide
 import com.seventhson.o2otest.utils.show
 import com.seventhson.o2otest.utils.toast
@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
+    override fun context(): Context {
+        return this
+    }
 
     @Inject
     lateinit var navigator: Navigator
@@ -31,7 +34,6 @@ class MainActivity : BaseActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getApplicationComponent().plus(MainModule(this)).inject(this)
         presenter.attachView(this)
         initView()
         showLoading()
@@ -58,7 +60,11 @@ class MainActivity : BaseActivity(), MainView {
         toast(getString(R.string.generic_error))
     }
 
-    fun initView() {
+    override fun showApiError(msg: String) {
+        toast(msg)
+    }
+
+    private fun initView() {
         setUpToolbar()
         setUpRecyclerView()
         setUpSearch()
@@ -76,8 +82,8 @@ class MainActivity : BaseActivity(), MainView {
         })
     }
 
-    fun setUpRecyclerView() {
-        adapter = RecipeAdapter(mutableListOf()) { recipe, imageView ->  goToDetailActivity(recipe, imageView)}
+    private fun setUpRecyclerView() {
+        adapter = RecipeAdapter(mutableListOf()) { recipe, imageView -> goToDetailActivity(recipe, imageView)}
         rvRecipes.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvRecipes.setHasFixedSize(true)
         rvRecipes.adapter = adapter

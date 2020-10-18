@@ -1,16 +1,21 @@
 package com.seventhson.o2otest
 
+import android.app.Activity
 import android.app.Application
-import com.seventhson.o2otest.di.ApplicationComponent
-import com.seventhson.o2otest.di.ApplicationModule
-import com.seventhson.o2otest.di.DaggerApplicationComponent
+import com.seventhson.o2otest.di.component.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
 /**
  * Created by Juanma Osuna on 4/04/19
  */
-class O2OTestApplication: Application() {
+class O2OTestApplication: Application(), HasActivityInjector {
 
-    private lateinit var appComponent: ApplicationComponent
+
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
@@ -18,13 +23,9 @@ class O2OTestApplication: Application() {
     }
 
     private fun initDagger(){
-        appComponent = DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
+        DaggerApplicationComponent.builder().application(this).build().inject(this)
     }
 
-    fun getApplicationComponent(): ApplicationComponent{
-        return appComponent
-    }
+    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
 }

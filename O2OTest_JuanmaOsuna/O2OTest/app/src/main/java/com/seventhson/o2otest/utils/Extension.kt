@@ -15,9 +15,8 @@ import com.squareup.picasso.Picasso
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
 fun ImageView.fromUrl(url: String) {
-    if(!url.isEmpty())
+    if(url.isNotEmpty())
         Picasso.get().load(url).placeholder(R.drawable.ic_android_green).into(this)
-
 }
 
 fun ProgressBar.show(){

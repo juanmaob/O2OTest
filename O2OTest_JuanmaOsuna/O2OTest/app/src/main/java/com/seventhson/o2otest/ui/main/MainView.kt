@@ -1,6 +1,7 @@
 package com.seventhson.o2otest.ui.main
 
-import com.seventhson.o2otest.data.pojos.Recipe
+
+import com.seventhson.o2otest.domain.model.Recipe
 import com.seventhson.o2otest.ui.common.BaseView
 
 /**
